@@ -1,0 +1,147 @@
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <title>IronPort Accesslogs Analysis Tool</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-default navbar-static-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+                    aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+                <a class="navbar-brand" href="#">WSA Accesslog Filter</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="#">Home</a></li>
+                    <!-- <li><a href="#contact">Contact</a></li> -->
+                    <!-- <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                         <ul class="dropdown-menu">
+                            <li><a href="#">Action</a></li> 
+                            <li><a href="#">Another action</a></li>
+                            <li><a href="#">Something else here</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li class="dropdown-header">Nav header</li>
+                            <li><a href="#">Separated link</a></li>
+                            <li><a href="#">One more separated link</a></li>
+                        </ul> 
+                        
+                    </li>  -->
+                    <li><a href="#about">About</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="mailto:yuxuliu@cisco.com">Support:yuxuliu@cisco.com</a></li>
+                    <!-- <li><a href="../navbar-static-top/">Static top</a></li>
+                    <li class="active"><a href="./">Fixed top <span class="sr-only">(current)</span></a></li> -->
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <form role="form" action="/analysis" method=post>
+        <p>Way 1: You can input accesslogs <b>line by line:</b></p>
+        <div class="form-group">
+            <textarea class="form-control" rows="10" name="textcontent"onFocus="if(value==defaultValue){value='';this.style.color='#000'}" onBlur="if(!value){value=defaultValue; this.style.color='#999'}" style="color:#999" />1499497142.669 807 10.124.40.58 TCP_MISS_SSL/304 249 GET https://www.google.com "bruce" DEFAULT_PARENT/proxy.esl.cisco.com - DEFAULT_CASE_12-DefaultGroup-BruceIdenProfile-NONE-NONE-NONE-DefaultGroup <IW_srch,3.4,0,"-",0,0,0,-,"-",-,-,-,"-",-,-,"-","-",-,-,IW_srch,-,"-","-","Google","Search Engine","-","-",2.47,0,-,"Unknown","-",-,"-",-,-,"-","-"> -</textarea>
+        </div>
+        <button type="submit" class="btn btn-default">Analysis</button>
+        <br>
+    </form>
+
+    <form action="/" method=post enctype=multipart/form-data>
+        <p>Way 2: You also can upload accesslogs <b>line by line:</b></p>
+        <p><input type=file name=file class="btn btn-default">
+            <input type=submit value=Upload class="btn btn-default">
+    </form>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">Analysis Result:</div>
+        <div class="panel-body">
+            <p>Notification:<font color="#FF0000">{{ errors }}</font></p>
+        </div>
+        <table border="1" class="table table-bordered table-hover table-condensed">
+            <tr>
+                <th>String Time</th>
+                <th>Elapsed time</th>
+                <th>Client IP</th>
+                <th>Result code</th>
+                <th>Size</th>
+                <th>Method</th>
+                <th>URL</th>
+                <th>User</th>
+                <th>Source</th>
+                <th>MIME</th>
+                <th>Decision Tag</th>
+                <th>Policy Name</th>
+                <th>Identification Profiles</th>
+                <th>Outbound Malware Scanning Policy</th>
+                <th>Data Security Policy</th>
+                <th>External DLP Policy</th>
+                <th>Routing Policy</th>
+                <th>Custom URL category</th>
+                <th>Web Reputation</th>
+                <th>Webroot Result</th>
+                <th>Webroot Spyware Name</th>
+                <th>Webroot Threat Risk Ratio</th>
+                <th>Webroot threat ID</th>
+                <th>Webroot trace ID</th>
+                <th>McAfee Result</th>
+                <th>McAfee Scanned File</th>
+                <th>McAfee Error</th>
+                <th>McAfee Detection Type</th>
+                <th>McAfee Virus Type</th>
+                <th>McAfee Virus Name</th>
+                <th>Sophos Result</th>
+                <th>Sophos Return code</th>
+                <th>Sophos Scanned File</th>
+                <th>Sophos Threat Name</th>
+                <th>Cisco Data Security</th>
+                <th>Cisco Data Security</th>
+                <th>Predefined URL Category</th>
+                <th>Dynamic Content Analysis URL Category</th>
+                <th>Anti-malware Category</th>
+                <th>Web Reputation filters Threat type</th>
+                <th>AVC engine App Name</th>
+                <th>AVC engine App Type</th>
+                <th>AVC engine App Behavior</th>
+                <th>Safe Browsing scann verdict</th>
+                <th>Average bandwidth</th>
+                <th>Bandwidth limited</th>
+                <th>AnyConnect</th>
+                <th>Outbound Anti-malware Scan Verdict</th>
+                <th>Outbound Anti-malware Threat Name</th>
+                <th>AMP</th>
+                <th>AMP Threat name</th>
+                <th>AMP File Reputation Score</th>
+                <th>AMP File Reputation Score</th>
+                <th>Download File Name</th>
+                <th>File SHA-256</th>
+                <th>Custom Fields</th>
+
+            </tr>
+        {% for item in items %}
+            <tr>
+                {% for line in item %}
+                <td>{{line}}</td>
+                {% endfor %}
+            </tr>
+        {% endfor %}
+        </table>
+    </div>
+
+</body>
+
+</html>
